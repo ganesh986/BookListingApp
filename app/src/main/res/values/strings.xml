@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Book Listing</string>
+
+    <!-- Text to display in the list when there are no earthquakes [CHAR LIMIT=NONE] -->
+    <string name="no_book">No book found.</string>
+
+    <!-- Error message when there is no internet connectivity [CHAR LIMIT=NONE] -->
+    <string name="no_internet_connection">No internet connection.</string>
+
+    <!--Item esxample string-->
+    <string name="title">My memories</string>
+    <string name="description">This book contains my memories</string>
+    <string name="author">Matteo Rivola</string>
+    <string name="date">11 Agosto 2016</string>
+    <string name="editor">Editore generale</string>
+
+    <string name="not_available">Not available yet for online buying!</string>
+</resources>

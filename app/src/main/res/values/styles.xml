@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Style for title -->
+    <style name="titleStyle">
+        <item name="android:textSize">@dimen/Item_title_height</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/double_padding</item>
+        <item name="android:paddingStart">@dimen/double_padding</item>
+        <item name="android:paddingEnd">@dimen/double_padding</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+
+    <!-- Style for subtext -->
+    <style name="subtextStyle">
+        <item name="android:textSize">@dimen/Item_description_height</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingEnd">@dimen/double_padding</item>
+        <item name="android:paddingStart">@dimen/double_padding</item>
+        <item name="android:paddingBottom">@dimen/double_padding</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <!-- Style for author -->
+    <style name="authorStyle">
+        <item name="android:textSize">@dimen/author_height</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingStart">@dimen/double_padding</item>
+        <item name="android:paddingEnd">@dimen/double_padding</item>
+        <item name="android:paddingBottom">@dimen/half_padding</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <!-- Icons -->
+    <style name="icons">
+        <item name="android:padding">@dimen/marginTopBottom</item>
+    </style>
+
+</resources>

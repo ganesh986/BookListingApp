@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Various dimension-->
+    <dimen name="distance_left">16dp</dimen>
+    <dimen name="distance_right">16dp</dimen>
+    <dimen name="half_padding">4dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="double_padding">14dp</dimen>
+    <dimen name="Item_title_height">20dp</dimen>
+    <dimen name="Item_description_height">14dp</dimen>
+    <dimen name="author_height">14dp</dimen>
+
+    <!-- Card -->
+    <dimen name="cornerRadius">4dp</dimen>
+    <dimen name="marginLeftRight">8dp</dimen>
+    <dimen name="marginTopBottom">4dp</dimen>
+
+</resources>
