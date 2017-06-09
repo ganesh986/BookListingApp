@@ -22,12 +22,6 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class BookListAdapter extends ArrayAdapter<BookList> {
 
     /**
-     * The part of the location string from the google API service that we use to determine
-     * whether or not there is a location offset present ("5km N of Cairo, Egypt").
-     */
-    private static final String LOCATION_SEPARATOR = " of ";
-
-    /**
      * Constructs a new {@link BookListAdapter}.
      *
      * @param context of the app
@@ -46,16 +40,17 @@ public class BookListAdapter extends ArrayAdapter<BookList> {
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
+
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.item, parent, false);
+            listItemView = listItemView = LayoutInflater.from(getContext()).inflate(R.layout.item, parent, false);
         }
 
         // Find the book at the given position in the list of books
         BookList currentBookList = getItem(position);
 
         ImageView booksView = (ImageView) listItemView.findViewById(R.id.image);
-        Picasso.with(getContext()).load(currentBookList.getImage()).into(booksView);
+//        Picasso.with(getContext()).load(currentBookList.getImage()).into(booksView);
+        Picasso.with(getContext()).load(currentBookList.getImage()).placeholder(getContext().getDrawable(R.drawable.no_image_available)).error(getContext().getDrawable(R.drawable.no_image_available)).into(booksView);
 
         // Find the TextView in the item.xml layout with the title.
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title);

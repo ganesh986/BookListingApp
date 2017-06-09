@@ -15,4 +15,7 @@
     <string name="editor">Editore generale</string>
 
     <string name="not_available">Not available yet for online buying!</string>
+    <string name="SearchButton">SEARCH</string>Search ypur book
+    <string name="HINT">Type argument of your interest</string>
+    <string name="nothing"></string>
 </resources>

@@ -195,11 +195,15 @@ public final class QueryUtils {
                 // For a given book, extract the JSONObject associated with the
                 // key called volumeInfo, which represents a list of all properties
                 // for that book.
-                JSONObject imagelinks = volumeinfo.getJSONObject("imageLinks");
+                String image = "";
+                if (volumeinfo.has("imageLinks")) {
+                    JSONObject imagelinks = volumeinfo.getJSONObject("imageLinks");
 
-                // Extract the url for the key called "thumbnail"
-                String image = imagelinks.getString("thumbnail");
-
+                    // Extract the url for the key called "thumbnail"
+                    image = imagelinks.optString("thumbnail", "");
+                } else {
+                    image = "NO_IMAGE";
+                }
                 // For a given book, extract the JSONObject associated with the
                 // key called saleInfo, which represents a list of all properties
                 // for that book.
