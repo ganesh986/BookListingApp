@@ -6,9 +6,9 @@
     <dimen name="half_padding">4dp</dimen>
     <dimen name="padding">8dp</dimen>
     <dimen name="double_padding">14dp</dimen>
-    <dimen name="Item_title_height">20dp</dimen>
-    <dimen name="Item_description_height">14dp</dimen>
-    <dimen name="author_height">14dp</dimen>
+    <dimen name="Item_title_height">20sp</dimen>
+    <dimen name="Item_description_height">14sp</dimen>
+    <dimen name="author_height">14sp</dimen>
 
     <!-- Card -->
     <dimen name="cornerRadius">4dp</dimen>

@@ -40,6 +40,9 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
+    private TextView mNoConnectionTextView;
+
+    public int loaderCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +60,55 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
         progressBar.setVisibility(View.GONE);
 
+        // Create a new adapter that takes an empty list of earthquakes as input
+        bookDataAdapter = new BookListAdapter(this, new ArrayList<BookList>());
+
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        listView.setAdapter(bookDataAdapter);
+
         loaderManager = getLoaderManager();
         loaderManager.initLoader(LOADER_ID, null, BookListActivity.this);
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        listView.setEmptyView(mEmptyStateTextView);
+        mNoConnectionTextView = (TextView) findViewById(R.id.no_connection);
+        mEmptyStateTextView.setText(getString(R.string.nothing));
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                mEmptyStateTextView.setText(R.string.nothing);
+
+                // Get a reference to the ConnectivityManager to check state of network connectivity
+                ConnectivityManager connMgr = (ConnectivityManager)
+                        getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                // Get details on the currently active default data network
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+                // If there is a network connection, fetch data
+                if (networkInfo != null && networkInfo.isConnected()) {
+
+                    mNoConnectionTextView.setText(R.string.nothing);
+                    // Get a reference to the LoaderManager, in order to interact with loaders.
+                    LoaderManager loaderManager = getLoaderManager();
+
+                    // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+                    // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+                    // because this activity implements the LoaderCallbacks interface).
+                    loaderManager.initLoader(LOADER_ID, null, BookListActivity.this);
+                } else {
+
+                    // Otherwise, display error
+                    // First, hide loading indicator so error message will be visible
+                    View loadingIndicator = findViewById(R.id.loading_indicator);
+                    loadingIndicator.setVisibility(View.GONE);
+
+                    // Update empty state with no connection error message
+                    mNoConnectionTextView.setVisibility(View.VISIBLE);
+                    mNoConnectionTextView.setText(R.string.no_internet_connection);
+                }
 
                 hideKeyBoard();
 
@@ -97,31 +140,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
             }
         });
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
-
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
-        }
     }
 
     @Override
@@ -146,11 +165,27 @@ public class BookListActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(Loader<List<BookList>> loader, List<BookList> data) {
+        loaderCounter = loaderCounter + 1;
 
-        bookDataAdapter = new BookListAdapter(this, data);
-        listView.setAdapter(bookDataAdapter);
-
+        // Hide loading indicator because the data has been loaded
         progressBar.setVisibility(View.GONE);
+
+        // Clear the adapter of previous earthquake data
+        bookDataAdapter.clear();
+
+        if (data.size() != 0 ) {
+//            mEmptyStateTextView.setVisibility(View.INVISIBLE);
+            mEmptyStateTextView.setText(getString(R.string.nothing));
+
+            bookDataAdapter = new BookListAdapter(this, data);
+            listView.setAdapter(bookDataAdapter);
+        }else {
+            if (data.size() == 0 && loaderCounter > 2 ) {
+
+                mEmptyStateTextView.setVisibility(View.VISIBLE);
+                mEmptyStateTextView.setText(getString(R.string.no_book));
+            }
+        }
     }
 
 
